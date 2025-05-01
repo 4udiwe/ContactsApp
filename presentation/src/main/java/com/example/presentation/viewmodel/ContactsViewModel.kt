@@ -15,11 +15,7 @@ class ContactsViewModel(
     private val _contactListStateFlow = MutableStateFlow<List<ContactModel>>(emptyList())
     val contactList = _contactListStateFlow.asStateFlow()
 
-    private fun loadContacts() = viewModelScope.launch {
+    fun loadContacts() = viewModelScope.launch {
         _contactListStateFlow.value = useCase()
-    }
-
-    init {
-        loadContacts()
     }
 }
