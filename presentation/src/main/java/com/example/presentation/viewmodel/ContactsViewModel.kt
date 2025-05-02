@@ -2,7 +2,6 @@ package com.example.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.ContactModel
 import com.example.domain.usecase.GetContactsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,10 +11,16 @@ class ContactsViewModel(
     private val useCase: GetContactsUseCase
 ) : ViewModel(){
 
-    private val _contactListStateFlow = MutableStateFlow<List<ContactModel>>(emptyList())
-    val contactList = _contactListStateFlow.asStateFlow()
+    private val _contactsState = MutableStateFlow<ContactsState>(ContactsState.Idle)
+    val contactsState = _contactsState.asStateFlow()
 
     fun loadContacts() = viewModelScope.launch {
-        _contactListStateFlow.value = useCase()
+        _contactsState.value = ContactsState.Loading
+
+        val result = useCase()
+        if (result.isEmpty())
+            _contactsState.value = ContactsState.Error
+
+        _contactsState.value = ContactsState.Success(contacts = result)
     }
 }
