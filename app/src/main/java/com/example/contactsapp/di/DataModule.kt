@@ -1,7 +1,7 @@
 package com.example.contactsapp.di
 
 import android.content.ContentResolver
-import com.example.data.datasource.ContactDataSourceImlp
+import com.example.data.datasource.ContactDataSourceImpl
 import com.example.data.repository.ContactRepositoryImpl
 import com.example.domain.datasource.ContactDataSource
 import com.example.domain.repository.ContactRepository
@@ -15,7 +15,7 @@ val dataModule = module {
     }
 
     single<ContactDataSource> {
-        ContactDataSourceImlp(
+        ContactDataSourceImpl(
             contentResolver = get()
         )
     }

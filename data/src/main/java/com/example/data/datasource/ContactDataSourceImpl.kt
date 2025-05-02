@@ -7,7 +7,7 @@ import com.example.domain.datasource.ContactDataSource
 import com.example.domain.model.ContactModel
 import java.util.UUID
 
-class ContactDataSourceImlp(
+class ContactDataSourceImpl(
     private val contentResolver: ContentResolver
 ): ContactDataSource {
     @SuppressLint("Range")

@@ -9,6 +9,14 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.core.content.ContextCompat
 
+/**
+ * Проверяет наличие разрешений на доступ к контактам устройства.
+ *
+ * @param context
+ * @param onPermissionGranted вызывается при предоставлении разрешения
+ * @param onPermissionDenied вызывается при отклонении разрешения
+ * @param requestPermission вызывается при запросе разрешения
+ */
 internal fun checkContactsPermission(
     context: Context,
     onPermissionGranted: () -> Unit,
@@ -33,6 +41,14 @@ internal fun checkContactsPermission(
 }
 
 
+/**
+ * Проверяет наличие разрешений на осуществление звонков с устройства.
+ *
+ * @param context
+ * @param onPermissionGranted вызывается при предоставлении разрешения
+ * @param onPermissionDenied вызывается при отклонении разрешения
+ * @param requestPermission вызывается при запросе разрешения
+ */
 internal fun checkCallPermission(
     context: Context,
     onPermissionGranted: () -> Unit,
@@ -55,6 +71,13 @@ internal fun checkCallPermission(
     }
 }
 
+
+/**
+ * Совершает звонок по телефонному номеру.
+ *
+ * @param context
+ * @param phoneNumber номер для звонка
+ */
 internal fun makeCall(context: Context, phoneNumber: String) {
     try {
         val intent = Intent(Intent.ACTION_CALL).apply {
