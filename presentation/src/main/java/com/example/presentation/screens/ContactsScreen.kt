@@ -13,13 +13,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.domain.model.ContactModel
 import com.example.presentation.ui.ContactItem
 import com.example.presentation.viewmodel.ContactsViewModel
 
 @Composable
 fun ContactsScreen(
     paddingValues: PaddingValues,
-    viewModel: ContactsViewModel
+    viewModel: ContactsViewModel,
+    onContactClicked: (ContactModel) -> Unit
 ) {
     val contacts = viewModel.contactList.collectAsState()
 
@@ -33,7 +35,10 @@ fun ContactsScreen(
         ) {
             items(contacts.value){ contact ->
                 ContactItem(
-                    contact = contact
+                    contact = contact,
+                    onClick = {
+                        onContactClicked(contact)
+                    }
                 )
             }
         }
